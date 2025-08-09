@@ -6,12 +6,7 @@
     <title>Bright Scholarship Digital Signage</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #0c2461, #1e3799);
@@ -21,336 +16,123 @@
             position: relative;
             animation: hueShift 120s infinite;
         }
-        
-        .container {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-            animation: float 6s ease-in-out infinite;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-        }
-        
+        .container { display: flex; flex-direction: column; height: 100vh; padding: 20px; position: relative; z-index: 2; }
+        .header { text-align: center; margin-bottom: 20px; animation: float 6s ease-in-out infinite; padding: 15px; background: rgba(0, 0, 0, 0.2); border-radius: 15px; }
         .scholarship-title {
             font-size: 4.5vw;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 3px;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            background: linear-gradient(to right, #ffd700, #ffffff, #ffd700);
+            background: linear-gradient(to right, #f48320, #ffffff, #fcc514);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             background-size: 200% auto;
             animation: shine 3s linear infinite;
         }
-        
-        .batch-info {
-            font-size: 2.2vw;
-            letter-spacing: 2px;
-            opacity: 0.9;
-            margin-top: 10px;
-        }
-        
-        .content {
-            display: flex;
-            flex: 1;
-            gap: 20px;
-            width: 100%;
-        }
-        
-        .awardees-container {
-            flex: 1;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        
+        .batch-info { font-size: 2.2vw; letter-spacing: 2px; opacity: 0.9; margin-top: 10px; }
+        .content { display: flex; flex: 1; gap: 20px; width: 100%; }
+        .awardees-container { flex: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         .awardee-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex; 
-            flex-direction: column;
+            background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 20px; backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2); display: flex; flex-direction: column;
             transition: opacity 0.5s ease-in-out, background-color 0.5s ease;
         }
-
-        .awardee-card.all-activities-complete {
-            background: rgba(46, 204, 113, 0.2);
-            border-color: rgba(46, 204, 113, 0.6);
-        }
-
-        .awardee-card.hidden {
-             display: none; 
-        }
-        
-        .awardee-card.fade-out {
-            opacity: 0; 
-        }
-        
+        .awardee-card.all-activities-complete { background: rgba(46, 204, 113, 0.2); border-color: rgba(46, 204, 113, 0.6); }
+        .awardee-card.hidden { display: none; }
+        .awardee-card.fade-out { opacity: 0; }
         .awardee-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
             background: linear-gradient(90deg, #ffd700, #ff6b6b, #48dbfb, #1dd1a1);
         }
-        
-        .awardee-header {
-            display: flex;
-            justify-content: center; 
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        .awardee-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        .awardee-name { font-size: 2.5vw; font-weight: 700; color: #ffd700; }
+        .awardee-score {
+            font-size: 3.5vw;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ffffff, #fcc514);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-        
-        .awardee-name {
-            font-size: 3vw; 
-            font-weight: 700;
-            color: #ffd700;
-        }
-        
-        .activities-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            flex: 1;
-        }
-        
+        .activities-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; flex: 1; }
         .activity-item {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-            align-items: center;      
-            justify-content: center;  
-            text-align: center;         
+            background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 12px; display: flex; flex-direction: column;
+            transition: all 0.3s ease; align-items: center; justify-content: center; text-align: center;
         }
-        
-        .activity-item.completed {
-            background: rgba(46, 204, 113, 0.2);
-            border: 1px solid rgba(46, 204, 113, 0.4);
-        }
-        
-        .activity-name {
-            font-size: 1.3vw;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .activity-status {
-            display: flex;
-            align-items: center;
-            font-size: 1.2vw;
-        }
-        
+        .activity-item.completed { background: rgba(46, 204, 113, 0.2); border: 1px solid rgba(46, 204, 113, 0.4); }
+        .activity-name { font-size: 1.3vw; margin-bottom: 8px; font-weight: 500; }
+        .activity-status { display: flex; align-items: center; font-size: 1.2vw; }
         .status-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            margin-right: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8vw;
+            width: 20px; height: 20px; border-radius: 50%; margin-right: 8px; display: flex;
+            align-items: center; justify-content: center; font-size: 0.8vw;
         }
-        
-        .completed .status-icon {
-            background: #2ecc71;
-        }
-        
-        .not-completed .status-icon {
-            background: #e74c3c;
-        }
-        
-        .date-time {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            font-size: 1.5vw;
-            opacity: 0.7;
-            background: rgba(0, 0, 3, 0.89);
-            padding: 5px 15px;
-            border-radius: 20px;
-            z-index: 2  ;
-            
-        }
-        
-        .logo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 2vw;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 5px 15px;
-            border-radius: 20px;
-        }
-        
-        .logo img {
-            width: 3.5vw;
-            max-width: 50px;
-            height: auto;
-            margin-right: 10px;
-        }
-        
-        .update-indicator {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 1.2vw;
-            background: rgba(0, 200, 0, 0.3);
-            padding: 5px 15px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .update-indicator.visible {
-            opacity: 1;
-        }
-        
-        .update-indicator i {
-            margin-right: 8px;
-        }
-        
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-        
-        /* Animations */
-        @keyframes shine {
-            to {
-                background-position: 200% center;
-            }
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes hueShift {
-            0% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(30deg); }
-            100% { filter: hue-rotate(0deg); }
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 1200px) {
-            .awardee-name { font-size: 4vw; }
-            .activity-name { font-size: 1.8vw; }
-            .activity-status { font-size: 1.6vw; }
-        }
-        
-        @media (max-width: 768px) {
-            .awardees-container { grid-template-columns: 1fr; }
-            .scholarship-title { font-size: 7vw; }
-            .batch-info { font-size: 3.5vw; }
-            .awardee-name { font-size: 6vw; }
-            .activity-name { font-size: 3vw; }
-            .activity-status { font-size: 2.8vw; }
-            .status-icon { width: 15px; height: 15px; }
-            .date-time, .logo, .update-indicator { font-size: 2.5vw; }
-        }
+        .completed .status-icon { background: #2ecc71; }
+        .not-completed .status-icon { background: #e74c3c; }
+        .date-time { position: absolute; bottom: 20px; right: 20px; font-size: 1.5vw; opacity: 0.7; background: rgba(0, 0, 3, 0.89); padding: 5px 15px; border-radius: 20px; z-index: 2; }
+        .logo { position: absolute; top: 20px; left: 20px; font-size: 2vw; font-weight: bold; display: flex; align-items: center; background: rgba(0, 0, 0, 0.3); padding: 5px 15px; border-radius: 20px; }
+        .logo img { width: 3.5vw; max-width: 50px; height: auto; margin-right: 10px; }
+        .update-indicator { position: absolute; top: 20px; right: 20px; font-size: 1.2vw; background: rgba(0, 200, 0, 0.3); padding: 5px 15px; border-radius: 20px; display: flex; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+        .update-indicator.visible { opacity: 1; }
+        .update-indicator i { margin-right: 8px; }
+        .particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .particle { position: absolute; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 15s infinite linear; }
+        @keyframes shine { to { background-position: 200% center; } }
+        @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes hueShift { 0% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(30deg); } 100% { filter: hue-rotate(0deg); } }
+        @media (max-width: 768px) { .content { flex-direction: column; } .awardees-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="particles" id="particles"></div>
-    
     <div class="logo">
-        <img src="https://i.ibb.co.com/ZzXLj4Z5/OIP-removebg-preview.png" alt="YBM BRILIANT Logo" style="width:7vw; max-width:100px;">
-        <span>YBM BRILIANT</span>
+        <img src="https://i.ibb.co/ZzXLj4Z5/OIP-removebg-preview.png" alt="YBM BRILiaN Logo" style="width:7vw; max-width:100px;">
+        <span>YBM BRILiaN</span>
     </div>
-    
     <div class="update-indicator" id="updateIndicator">
         <i class="fas fa-sync"></i>
         <span>Data Updated</span>
     </div>
-    
     <div class="container">
         <div class="header">
             <h1 class="scholarship-title">Bright Scholarship</h1>
-            <div class="batch-info">Batch 9 - Daily Quest Dashboard</div>
+            <div class="batch-info">Batch 9 - Daily Activity</div>
         </div>
-        
         <div class="content">
-            <div class="awardees-container" id="awardeesContainer">
-                </div>
+            <div class="awardees-container" id="awardeesContainer"></div>
         </div>
     </div>
-    
     <div class="date-time" id="datetime"></div>
-    
     <script>
-        // Google Sheets integration
         const SHEET_ID = '1r0ymBQyxJlQpqK3eIpa7Lak62M3gLCEl0uC_mavKjP0';
         const SHEET_NAME = 'Sheet1';
         const API_KEY = 'AIzaSyCLRTZj7vEOotLZH_RG_vuN8CTIwmnZxCk'; 
         
-        // Awardee data structure - will be populated dynamically
+        const ACTIVITY_POINTS = {
+            "Dhuha": 3,
+            "Tahajjud": 3,
+            "Puasa Sunnah": 3,
+            "Syuruq": 3,
+            "Mandi Subuh": 2,
+            "kemasjid Sebelum Adzan Subuh": 2
+        };
+
         let awardeesData = {};
-        
-        // --- Carousel State ---
         let carouselInterval;
         let currentIndex = 0;
-        const CARDS_PER_PAGE = 2; // Show 2 awardees at a time
-        const ROTATION_INTERVAL = 5000; // 5 seconds
-        const FADE_DURATION = 500; // 0.5 seconds (must match CSS transition)
+        const CARDS_PER_PAGE = 2;
+        const ROTATION_INTERVAL = 5000;
+        const FADE_DURATION = 500;
 
-        // Fetch data from Google Sheets
         async function fetchDataFromSheet() {
             const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
-            
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                
-                if (!data.values || data.values.length < 2) {
-                    throw new Error('No data found in the sheet');
-                }
+                if (!data.values || data.values.length < 2) throw new Error('No data found');
                 
                 const headers = data.values[0];
                 const newAwardeesData = {}; 
@@ -358,161 +140,118 @@
                 for (let j = 1; j < headers.length; j++) {
                     const awardeeName = headers[j].trim();
                     if (awardeeName) {
-                        newAwardeesData[awardeeName] = { activities: {} };
+                        newAwardeesData[awardeeName] = { activities: {}, score: 0 };
                     }
                 }
                 
                 for (let i = 1; i < data.values.length; i++) {
                     const row = data.values[i];
-                    const activityName = row[0];
+                    // --- THIS LINE IS THE FIX ---
+                    const activityName = row[0] ? row[0].trim() : null; 
                     if (!activityName) continue; 
                     
                     for (let j = 1; j < headers.length; j++) {
                         const awardeeName = headers[j].trim();
                         if (newAwardeesData[awardeeName]) {
-                            const status = row[j] || "belum";
-                            newAwardeesData[awardeeName].activities[activityName] = {
-                                completed: status.toLowerCase() === "sudah"
-                            };
+                            const status = row[j] || "0";
+                            const isCompleted = status === "1";
+                            newAwardeesData[awardeeName].activities[activityName] = { completed: isCompleted };
+                            
+                            if (isCompleted) {
+                                const points = ACTIVITY_POINTS[activityName] || 1;
+                                newAwardeesData[awardeeName].score += points;
+                            }
                         }
                     }
                 }
                 
                 awardeesData = newAwardeesData;
-                
                 updateDisplay();
                 startCarousel();
-                
                 showUpdateIndicator();
-                return true;
             } catch (error) {
-                console.error('Error fetching data from Google Sheets:', error);
-                document.getElementById('awardeesContainer').innerHTML = `<div style="font-size: 2vw; text-align: center;">Error loading data. Please check the console.</div>`;
-                return false;
+                console.error('Error fetching data:', error);
+                document.getElementById('awardeesContainer').innerHTML = `<div style="font-size: 2vw; text-align: center;">Error loading data.</div>`;
             }
         }
         
-        // Update the display with all awardee cards (initially hidden)
         function updateDisplay() {
             const container = document.getElementById('awardeesContainer');
             container.innerHTML = ''; 
-            
             for (const awardeeName in awardeesData) {
                 const awardee = awardeesData[awardeeName];
-                
                 const activities = Object.values(awardee.activities);
                 let isAllComplete = activities.length > 0 && activities.every(act => act.completed);
-
                 const awardeeCard = document.createElement('div');
-                
                 const allCompleteClass = isAllComplete ? 'all-activities-complete' : '';
                 awardeeCard.className = `awardee-card hidden ${allCompleteClass}`; 
-
+                
                 const awardeeHeader = `
                     <div class="awardee-header">
                         <div class="awardee-name">${awardeeName}</div>
+                        <div class="awardee-score">${awardee.score}</div>
                     </div>
                 `;
-                
+
                 const activitiesGrid = document.createElement('div');
                 activitiesGrid.className = 'activities-grid';
-                
                 for (const activityName in awardee.activities) {
                     const activity = awardee.activities[activityName];
                     const completedClass = activity.completed ? 'completed' : 'not-completed';
                     const icon = activity.completed ? '✓' : '✗';
                     const statusText = activity.completed ? 'Completed' : 'Not Completed';
-
-                    const activityItem = `
-                        <div class="activity-item ${completedClass}">
-                            <div class="activity-name">${activityName}</div>
-                            <div class="activity-status">
-                                <div class="status-icon">${icon}</div>
-                                <span>${statusText}</span>
-                            </div>
-                        </div>
-                    `;
-                    activitiesGrid.innerHTML += activityItem;
+                    activitiesGrid.innerHTML += `<div class="activity-item ${completedClass}"><div class="activity-name">${activityName}</div><div class="activity-status"><div class="status-icon">${icon}</div><span>${statusText}</span></div></div>`;
                 }
-                
                 awardeeCard.innerHTML = awardeeHeader;
                 awardeeCard.appendChild(activitiesGrid);
                 container.appendChild(awardeeCard);
             }
         }
 
-        // --- Carousel Functions ---
         function showNextAwardees() {
             const cards = document.querySelectorAll('.awardee-card');
             if (cards.length === 0) return;
-
-            cards.forEach(card => {
-                if (!card.classList.contains('hidden')) {
-                    card.classList.add('fade-out');
-                }
-            });
-
+            cards.forEach(card => { if (!card.classList.contains('hidden')) card.classList.add('fade-out'); });
             setTimeout(() => {
-                cards.forEach(card => {
-                    card.classList.add('hidden');
-                    card.classList.remove('fade-out');
-                });
-
+                cards.forEach(card => { card.classList.add('hidden'); card.classList.remove('fade-out'); });
                 for (let i = 0; i < CARDS_PER_PAGE; i++) {
                     const cardIndex = (currentIndex + i) % cards.length;
-                    if (cards[cardIndex]) {
-                        cards[cardIndex].classList.remove('hidden');
-                    }
+                    if (cards[cardIndex]) cards[cardIndex].classList.remove('hidden');
                 }
-
                 currentIndex = (currentIndex + CARDS_PER_PAGE) % cards.length;
-
             }, FADE_DURATION);
         }
 
         function startCarousel() {
             clearInterval(carouselInterval);
-            
             const cards = document.querySelectorAll('.awardee-card');
             if (cards.length <= CARDS_PER_PAGE) {
                  cards.forEach(card => card.classList.remove('hidden'));
                  return;
             }
-
             currentIndex = 0; 
             showNextAwardees(); 
             carouselInterval = setInterval(showNextAwardees, ROTATION_INTERVAL);
         }
         
-        // Show update indicator
         function showUpdateIndicator() {
             const indicator = document.getElementById('updateIndicator');
             indicator.classList.add('visible');
-            setTimeout(() => {
-                indicator.classList.remove('visible');
-            }, 3000);
+            setTimeout(() => indicator.classList.remove('visible'), 3000);
         }
         
-        // Update date and time
         function updateDateTime() {
             const now = new Date();
-            const options = { 
-                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-                hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
-            };
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
             document.getElementById('datetime').textContent = now.toLocaleString('en-US', options);
         }
         
-        // Create background particles
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             if (particlesContainer.children.length > 0) return; 
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
+            for (let i = 0; i < 30; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
-                
                 const size = Math.random() * 10 + 2;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
@@ -521,21 +260,16 @@
                 particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
                 particle.style.animationDelay = `${Math.random() * 5}s`;
                 particle.style.opacity = Math.random() * 0.5 + 0.1;
-                
                 particlesContainer.appendChild(particle);
             }
         }
         
-        // Initialize
         document.addEventListener('DOMContentLoaded', async () => {
             updateDateTime();
             setInterval(updateDateTime, 1000);
             createParticles();
-            
             await fetchDataFromSheet();
-            
-            // Set up periodic data refresh (every 25 seconds)
-            setInterval(fetchDataFromSheet, 30000);
+            setInterval(fetchDataFromSheet, 35000); // means every 30 seconds the data will be fetched or refreshed
         });
     </script>
 </body>
