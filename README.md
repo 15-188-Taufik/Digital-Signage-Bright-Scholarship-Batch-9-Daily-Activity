@@ -1,4 +1,4 @@
-# Digital Signage - Pemantauan Aktivitas Harian Bright Scholarship
+# Digital Signage - Daily Activity Awardee Bright Scholarship
 
 ![Digital Signage Preview](https://placehold.co/800x200/0c2461/ffffff?text=Digital+Signage+YBM+BRILiaN&font=segoe-ui)
 
